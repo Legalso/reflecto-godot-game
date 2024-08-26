@@ -254,7 +254,7 @@ tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD+/wIAAAAAAAA
 tile_set = SubResource("TileSet_g8arc")
 
 [node name="Player" parent="." instance=ExtResource("1_a4qws")]
-position = Vector2(1, 0)
+position = Vector2(1, 16)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, -13)
@@ -280,6 +280,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PauseMenu" parent="Player/CanvasLayer/Control" instance=ExtResource("11_ahcbv")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0

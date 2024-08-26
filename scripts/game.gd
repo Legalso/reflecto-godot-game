@@ -7,6 +7,8 @@ extends Node2D
 var paused = false
 
 func _ready():
+	get_viewport().size = DisplayServer.screen_get_size()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pause_menu.hide()
 	pause_menu.set_game_instance(self)  # Pass the instance to the PauseMenu
 
@@ -18,9 +20,11 @@ func _process(_delta):
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		Engine.time_scale = 1
 	else:
 		pause_menu.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Engine.time_scale = 0
 	
 	paused = !paused
