@@ -8,9 +8,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Get th
 var paused = false  # Declare the paused variable
 var COYOTE_TIME: float = 0.2
 @onready var coyote_timer = $Coyote_Timer
+var ISALIVE = true
 
 func _process(delta):
-	if not paused:
+	if ISALIVE and not paused:
 		if JUMP_AVAILABLE:
 			if coyote_timer.is_stopped():
 				coyote_timer.start(COYOTE_TIME)

@@ -282,11 +282,6 @@ grow_vertical = 2
 [node name="PauseMenu" parent="Player/CanvasLayer/Control" instance=ExtResource("11_ahcbv")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -43.0
 offset_top = -25.0
 offset_right = -43.0

@@ -16,6 +16,8 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("pause") and not killzone.is_dead:
 		pauseMenu()
+	if killzone.is_dead:
+		player.ISALIVE = false
 	
 func pauseMenu():
 	if paused:
