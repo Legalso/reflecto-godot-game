@@ -19,11 +19,14 @@ script = ExtResource("1_ggsgf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_itcly")
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.047
 offset_left = -3283.0
 offset_top = -1409.0
-offset_right = 3249.0
-offset_bottom = 1369.0
+offset_right = 3153.0
+offset_bottom = 1318.24
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
