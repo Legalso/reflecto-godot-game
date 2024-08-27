@@ -4,7 +4,7 @@ extends Node2D
 @onready var pause_menu = $Player/CanvasLayer/Control/PauseMenu
 @onready var killzone = $Killzone
 
-var paused = false
+var PAUSED = false
 
 func _ready():
 	get_viewport().size = DisplayServer.screen_get_size()
@@ -20,7 +20,7 @@ func _process(_delta):
 		player.ISALIVE = false
 	
 func pauseMenu():
-	if paused:
+	if PAUSED:
 		pause_menu.hide()
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		Engine.time_scale = 1
@@ -29,5 +29,5 @@ func pauseMenu():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Engine.time_scale = 0
 	
-	paused = !paused
-	player.paused = paused  
+	PAUSED = !PAUSED
+	player.PAUSED = PAUSED  

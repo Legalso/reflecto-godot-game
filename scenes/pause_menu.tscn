@@ -21,12 +21,12 @@ script = ExtResource("1_ggsgf")
 material = SubResource("ShaderMaterial_itcly")
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.05
-anchor_bottom = 0.047
+anchor_right = 0.059
+anchor_bottom = 0.073
 offset_left = -3283.0
 offset_top = -1409.0
-offset_right = 3153.0
-offset_bottom = 1318.24
+offset_right = 3135.72
+offset_bottom = 1290.16
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -42,6 +42,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bivia")
 text = "Resume"
 
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bivia")
+text = "Controls"
+
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bivia")
@@ -49,4 +54,5 @@ text = "Quit
 "
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

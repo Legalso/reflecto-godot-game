@@ -28,6 +28,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_v7kqe")
 text = "Volume"
 
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v7kqe")
+text = "Controls"
+
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_v7kqe")
