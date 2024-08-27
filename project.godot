@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="First Game"
-config/description="Test game"
+config/name="platformer"
+config/description="prototype for a platformer game, where you can only counter"
 config/version="0"
 config/tags=PackedStringArray("tutorial")
 run/main_scene="res://scenes/menu.tscn"
