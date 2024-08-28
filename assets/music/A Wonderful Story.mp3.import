@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddsj2wy5funcj"
+path="res://.godot/imported/A Wonderful Story.mp3-fc30cda1217e89e98ea199757f8829a0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/A Wonderful Story.mp3"
+dest_files=["res://.godot/imported/A Wonderful Story.mp3-fc30cda1217e89e98ea199757f8829a0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
