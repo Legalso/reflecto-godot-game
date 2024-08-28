@@ -192,7 +192,7 @@ shape = SubResource("CapsuleShape2D_5nup3")
 [node name="Coyote_Timer" type="Timer" parent="."]
 
 [node name="dash_timer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.12
 
 [node name="dash_rebounce" type="Timer" parent="."]
 

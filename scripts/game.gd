@@ -28,6 +28,7 @@ func pauseMenu():
 		pause_menu.show()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Engine.time_scale = 0
-	
+		$Player/CanvasLayer/Control/PauseMenu/MarginContainer/VBoxContainer/Resume.grab_focus()
+		
 	PAUSED = !PAUSED
 	player.PAUSED = PAUSED  

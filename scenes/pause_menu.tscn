@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://duo6ahui57m"]
+[gd_scene load_steps=6 format=3 uid="uid://duo6ahui57m"]
 
 [ext_resource type="FontFile" uid="uid://drg3cmm8u6m7o" path="res://assets/fonts/PixelOperator8.ttf" id="1_bivia"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_ggsgf"]
 [ext_resource type="Shader" path="res://assets/shaders/pause_menu.gdshader" id="2_7d2wj"]
+[ext_resource type="Script" path="res://scenes/button.gd" id="4_k0yhj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_itcly"]
 shader = ExtResource("2_7d2wj")
@@ -50,6 +51,7 @@ alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bivia")
 text = "Resume"
+script = ExtResource("4_k0yhj")
 
 [node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -59,8 +61,7 @@ text = "Controls"
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bivia")
-text = "Quit
-"
+text = "Quit to menu"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_quit_pressed"]

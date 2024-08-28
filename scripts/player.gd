@@ -21,7 +21,7 @@ var CAN_DASH = true
 var DASH_DIRECTION = Vector2.ZERO  # Direção do dash (mantida fixa durante o dash)
 
 # Duração do dash baseado na distância desejada e velocidade
-const DASH_DURATION = 0.2  # Duração fixa para o dash (em segundos)
+const DASH_DURATION = 0.12  # Duração fixa para o dash (em segundos)
 
 func _process(delta):
 	if ISALIVE and not PAUSED:
