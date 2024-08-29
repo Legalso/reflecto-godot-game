@@ -3,21 +3,26 @@ extends Node2D
 @onready var player = $Player  # Get a reference to the player node
 @onready var pause_menu = $Player/CanvasLayer/Control/PauseMenu
 @onready var killzone = $Killzone
+@onready var ui_node = $UInode/UI
 
 var PAUSED = false
 
 func _ready():
 	get_viewport().size = DisplayServer.screen_get_size()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#checkGamepad()
 	pause_menu.hide()
 	pause_menu.set_game_instance(self)  # Pass the instance to the PauseMenu
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("pause") and not killzone.is_dead:
 		pauseMenu()
 	if killzone.is_dead:
 		player.ISALIVE = false
+		
+#func checkGamepad():
+	#Input.get_connected_joypads()
 	
 func pauseMenu():
 	if PAUSED:

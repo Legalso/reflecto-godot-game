@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://bdk04ba6knj0d"]
+[gd_scene load_steps=20 format=4 uid="uid://bdk04ba6knj0d"]
 
 [ext_resource type="PackedScene" uid="uid://ducy51jtwnvp2" path="res://scenes/player.tscn" id="1_a4qws"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_hlxbs"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_nyioe"]
 [ext_resource type="Texture2D" uid="uid://nk1dmqkpgyms" path="res://assets/sprites/world_tileset.png" id="2_03g5k"]
+[ext_resource type="Texture2D" uid="uid://cc1key12aaiey" path="res://icon-godot.svg" id="2_gbyh7"]
 [ext_resource type="FontFile" uid="uid://btobu8nli76sk" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_oifdd"]
 [ext_resource type="PackedScene" uid="uid://lwn7a7wc3c6q" path="res://scenes/platform.tscn" id="3_0vqly"]
 [ext_resource type="PackedScene" uid="uid://bgsko57hp2hw7" path="res://scenes/coin.tscn" id="4_jvioi"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cl1tg3721oiio" path="res://scenes/slime.tscn" id="6_no2bd"]
 [ext_resource type="FontFile" uid="uid://drg3cmm8u6m7o" path="res://assets/fonts/PixelOperator8.ttf" id="7_gaojw"]
 [ext_resource type="PackedScene" uid="uid://duo6ahui57m" path="res://scenes/pause_menu.tscn" id="11_ahcbv"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="13_g3j0s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e30i5"]
 texture = ExtResource("2_03g5k")
@@ -317,20 +319,20 @@ autoplay = "move"
 
 [node name="Coins" type="Node" parent="."]
 
-[node name="Coin4" parent="Coins" instance=ExtResource("4_jvioi")]
-position = Vector2(327, -125)
-
 [node name="Coin5" parent="Coins" instance=ExtResource("4_jvioi")]
 position = Vector2(727, 5)
 
-[node name="Coin" parent="Coins" instance=ExtResource("4_jvioi")]
-position = Vector2(118, -24)
+[node name="Coin4" parent="Coins" instance=ExtResource("4_jvioi")]
+position = Vector2(327, -125)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_jvioi")]
+position = Vector2(382, 4)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("4_jvioi")]
 position = Vector2(382, -15)
 
-[node name="Coin3" parent="Coins" instance=ExtResource("4_jvioi")]
-position = Vector2(382, 4)
+[node name="Coin" parent="Coins" instance=ExtResource("4_jvioi")]
+position = Vector2(118, -24)
 
 [node name="Labels" type="Node" parent="."]
 
@@ -349,3 +351,32 @@ position = Vector2(183, -128)
 
 [node name="Slime2" parent="." instance=ExtResource("6_no2bd")]
 position = Vector2(263, 16)
+
+[node name="UInode" type="Control" parent="."]
+z_index = 7
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="UI" type="CanvasLayer" parent="UInode"]
+
+[node name="TouchDASH" type="TouchScreenButton" parent="UInode/UI"]
+position = Vector2(1617, 836)
+scale = Vector2(1.42187, 1.42187)
+texture_normal = ExtResource("2_gbyh7")
+action = "dash"
+visibility_mode = 1
+
+[node name="TouchJUMP" type="TouchScreenButton" parent="UInode/UI"]
+position = Vector2(1299, 832)
+scale = Vector2(1.42187, 1.42187)
+texture_normal = ExtResource("2_gbyh7")
+action = "jump"
+visibility_mode = 1
+
+[node name="Virtual Joystick" parent="UInode/UI" instance=ExtResource("13_g3j0s")]
+visibility_mode = 1

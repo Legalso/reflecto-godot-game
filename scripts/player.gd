@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var COYOTE_TIMER = $Coyote_Timer
+@onready var joystick = $"../UInode/UI/Virtual Joystick"
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var FALL_GRAVITY = GRAVITY + (GRAVITY * 0.35)
@@ -69,7 +70,11 @@ func _process(delta):
 			velocity = DASH_DIRECTION * DASH_SPEED
 		else:
 			# Aplica velocidade normal quando não está dashando
+			# Combine o input do teclado/mouse com o do joystick
 			var direction = Input.get_axis("move_left", "move_right")
+			if joystick.is_pressed:
+				direction = joystick.output.x  # Use o valor do joystick se estiver sendo pressionado
+			
 			velocity.x = direction * SPEED
 
 		move_and_slide()
