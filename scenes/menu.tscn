@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_paqeq"]
 [ext_resource type="FontFile" uid="uid://btobu8nli76sk" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_gfxvq"]
-[ext_resource type="Script" path="res://scenes/button.gd" id="3_s44jh"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="3_s44jh"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3

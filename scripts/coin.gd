@@ -12,6 +12,3 @@ func _on_body_entered(body):
 	if COIN_SOUND:
 		audio_player.stream = COIN_SOUND  # Set the audio stream
 		audio_player.play()  # Play the sound
-		print("Coin sound loaded successfully")
-	else:
-		print("Coin sound not loaded")

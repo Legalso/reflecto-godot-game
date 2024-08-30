@@ -26,12 +26,13 @@ Music="*res://scenes/music.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=640
+window/size/viewport_height=360
 window/size/mode=3
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/vsync/vsync_mode=0
+window/stretch/scale_mode="integer"
+window/handheld/orientation=4
 
 [editor]
 
@@ -113,6 +114,16 @@ dash={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[input_devices]
+
+pointing/vsync/vsync_mode=0
+pointing/size/resizable=true
+pointing/stretch/mode="viewport"
+pointing/stretch/aspect="expand"
+pointing/stretch/scale_mode="fractional"
+pointing/size/mode=3
+pointing/size/viewport_width=650
 
 [rendering]
 

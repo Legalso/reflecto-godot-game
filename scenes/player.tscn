@@ -1,8 +1,13 @@
-[gd_scene load_steps=30 format=3 uid="uid://ducy51jtwnvp2"]
+[gd_scene load_steps=32 format=3 uid="uid://ducy51jtwnvp2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_g8onh"]
 [ext_resource type="Texture2D" uid="uid://dwruorc2q8kvu" path="res://assets/sprites/knight.png" id="1_i2svx"]
+[ext_resource type="Shader" path="res://assets/shaders/SmoothPixel.shader.gdshader" id="2_ots8l"]
 [ext_resource type="PackedScene" uid="uid://2ogrc1m5ehnp" path="res://scenes/randomized_audio.tscn" id="3_u6xrd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_83koh"]
+resource_local_to_scene = true
+shader = ExtResource("2_ots8l")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sb7tr"]
 atlas = ExtResource("1_i2svx")
@@ -205,6 +210,7 @@ collision_layer = 2
 script = ExtResource("1_g8onh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_83koh")
 position = Vector2(0, -12)
 scale = Vector2(1.00136, 1)
 sprite_frames = SubResource("SpriteFrames_vclkd")
@@ -227,11 +233,11 @@ wait_time = 0.12
 
 [node name="RayCast2D_right" type="RayCast2D" parent="."]
 position = Vector2(0, -19)
-target_position = Vector2(7, 0)
+target_position = Vector2(6, 0)
 
 [node name="RayCast2D_left" type="RayCast2D" parent="."]
 position = Vector2(0, -19)
-target_position = Vector2(-7, 0)
+target_position = Vector2(-6, 0)
 
 [connection signal="timeout" from="Coyote_Timer" to="." method="Coyoye_Timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

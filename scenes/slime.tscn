@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl1tg3721oiio"]
+[gd_scene load_steps=12 format=3 uid="uid://cl1tg3721oiio"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_gqa4k"]
 [ext_resource type="Texture2D" uid="uid://bkaxgm3e3luju" path="res://assets/sprites/slime_green.png" id="1_yi3ke"]
 [ext_resource type="PackedScene" uid="uid://dksl6xvvkbiha" path="res://scenes/killzone.tscn" id="2_isf7w"]
+[ext_resource type="Shader" path="res://assets/shaders/SmoothPixel.shader.gdshader" id="2_j6hvv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfte3"]
+shader = ExtResource("2_j6hvv")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twh7l"]
 atlas = ExtResource("1_yi3ke")
@@ -47,6 +51,7 @@ size = Vector2(10, 13)
 script = ExtResource("1_gqa4k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_lfte3")
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_2mng5")
 autoplay = "default"

@@ -55,12 +55,8 @@ func _process(delta):
 
 		# Verificar o primeiro ou segundo salto (jump1 ou jump2)
 		if Input.is_action_just_pressed("jump") and (JUMP_AVAILABLE and (is_on_floor() or not COYOTE_TIMER.is_stopped()) or (JUMP_COUNT == 1 and not is_on_floor())):
-			print("Jump action triggered")
 			if JUMP_SOUND:
-				print("Jump sound loaded successfully")
 				randomized_audio.custom_play(JUMP_SOUND)  # Pass the jump sound
-			else:
-				print("Jump sound not loaded")
 			velocity.y = JUMP_VELOCITY
 			JUMP_COUNT += 1
 			if JUMP_COUNT >= JUMP_MAX:
@@ -102,10 +98,7 @@ func _process(delta):
 			velocity = DASH_DIRECTION * DASH_SPEED
 		else:
 			# Aplica velocidade normal quando não está dashando
-			# Combine o input do teclado/mouse com o do joystick
 			var direction = Input.get_axis("move_left", "move_right")
-			if joystick.is_pressed:
-				direction = joystick.output.x  # Use o valor do joystick se estiver sendo pressionado
 			
 			velocity.x = direction * SPEED
 

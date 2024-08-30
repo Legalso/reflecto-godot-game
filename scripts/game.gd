@@ -10,7 +10,6 @@ var PAUSED = false
 func _ready():
 	get_viewport().size = DisplayServer.screen_get_size()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	#checkGamepad()
 	pause_menu.hide()
 	pause_menu.set_game_instance(self)  # Pass the instance to the PauseMenu
 	
@@ -20,9 +19,6 @@ func _process(_delta):
 		pauseMenu()
 	if killzone.is_dead:
 		player.ISALIVE = false
-		
-#func checkGamepad():
-	#Input.get_connected_joypads()
 	
 func pauseMenu():
 	if PAUSED:
