@@ -4,9 +4,12 @@ extends CharacterBody2D
 @onready var COYOTE_TIMER = $Coyote_Timer
 @onready var joystick = $"../UInode/UI/Virtual Joystick"
 @onready var randomized_audio = $RandomizedAudio
+@onready var ray_cast_2d_right = $RayCast2D_right
+@onready var ray_cast_2d_left = $RayCast2D_left
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
-var FALL_GRAVITY = GRAVITY + (GRAVITY * 0.35)
+var FALL_GRAVITY = GRAVITY + (GRAVITY * 0.40)
+var WALL_GRAVITY = GRAVITY * 0.10  #90% less gravity when touching a wall
 var PAUSED = false
 var ISALIVE = true
 const SPEED = 130.0
@@ -17,6 +20,7 @@ const JUMP_MAX = 2
 var JUMP_COUNT = 0
 const COYOTE_TIME: float = 0.4
 var JUMP_SOUND = preload("res://assets/sounds/jump.wav")
+# var WALL_JUMP_REPEL_FORCE = 1000
 
 const DASH_SPEED = 500.0  # Velocidade fixa para o dash
 var DASHING = false
@@ -26,6 +30,16 @@ var DASH_SOUND = preload("res://assets/sounds/tap.wav")
 
 # Duração do dash baseado na distância desejada e velocidade
 const DASH_DURATION = 0.12  # Duração fixa para o dash (em segundos)
+
+var collision_disabled = false
+var collision_disable_timer = Timer.new()
+
+# New variable to track if the player is touching a wall
+var touching_wall = false
+
+func _ready():
+	add_child(collision_disable_timer)
+	collision_disable_timer.connect("timeout", Callable(self, "_on_collision_disable_timeout"))
 
 func _process(delta):
 	if ISALIVE and not PAUSED:
@@ -51,6 +65,22 @@ func _process(delta):
 			JUMP_COUNT += 1
 			if JUMP_COUNT >= JUMP_MAX:
 				JUMP_AVAILABLE = false
+				
+			# Wall climb
+			# TODO: optimize and fix this 'Gambiarra'
+			# TODO: add bounce after hitting wall --> need to rebuild all the walk code
+			if ray_cast_2d_right.is_colliding() and ISALIVE:
+				var collider = ray_cast_2d_right.get_collider()
+				if collider.name == "TileMapLayer":
+					JUMP_COUNT = 1
+					# velocity.x = -WALL_JUMP_REPEL_FORCE  # Repel to the left
+					disable_collision_temporarily()
+			if ray_cast_2d_left.is_colliding() and ISALIVE:
+				var collider = ray_cast_2d_left.get_collider()
+				if collider.name == "TileMapLayer":
+					JUMP_COUNT = 1
+					# velocity.x = WALL_JUMP_REPEL_FORCE  # Repel to the right
+					disable_collision_temporarily()
 
 		# Aplica queda mais rápida se o pulo for interrompido
 		if Input.is_action_just_released("jump") and velocity.y < 0:
@@ -79,7 +109,8 @@ func _process(delta):
 			
 			velocity.x = direction * SPEED
 
-		move_and_slide()
+		if not collision_disabled:
+			move_and_slide()
 
 		# Inverte o sprite do personagem com base na direção, se não estiver dashando
 		if not DASHING:
@@ -99,6 +130,9 @@ func _process(delta):
 		if DASHING:
 			animated_sprite.play("dash")	
 
+		# Update touching_wall state
+		touching_wall = ray_cast_2d_right.is_colliding() or ray_cast_2d_left.is_colliding()
+
 # Desabilita o pulo se o personagem não estiver no chão e o Coyote Time acabar
 func Coyoye_Timeout():
 	if not is_on_floor() and JUMP_COUNT == 0:
@@ -106,7 +140,9 @@ func Coyoye_Timeout():
 
 # Função para definir a gravidade com base no movimento do personagem
 func Get_gravity_v2(velocity: Vector2):
-	if velocity.y < 0:
+	if touching_wall and velocity.y > 0:
+		return WALL_GRAVITY
+	elif velocity.y < 0:
 		return GRAVITY
 	else:
 		return FALL_GRAVITY
@@ -118,3 +154,12 @@ func _on_dash_timer_timeout():
 # Timer para resetar a possibilidade de dashar (não necessário com a lógica atual, mas pode ser útil em algumas implementações)
 func _on_dash_rebounce_timeout():
 	CAN_DASH = true  # Reabilita o dash após um tempo (não usado atualmente)
+
+# Temporarily disable collision detection
+func disable_collision_temporarily():
+	collision_disabled = true
+	collision_disable_timer.start(0.1)  # Disable collision for 0.1 seconds
+
+# Re-enable collision detection
+func _on_collision_disable_timeout():
+	collision_disabled = false

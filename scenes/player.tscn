@@ -225,6 +225,14 @@ wait_time = 0.12
 
 [node name="RandomizedAudio" parent="." instance=ExtResource("3_u6xrd")]
 
+[node name="RayCast2D_right" type="RayCast2D" parent="."]
+position = Vector2(0, -19)
+target_position = Vector2(7, 0)
+
+[node name="RayCast2D_left" type="RayCast2D" parent="."]
+position = Vector2(0, -19)
+target_position = Vector2(-7, 0)
+
 [connection signal="timeout" from="Coyote_Timer" to="." method="Coyoye_Timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_rebounce" to="." method="_on_dash_rebounce_timeout"]
