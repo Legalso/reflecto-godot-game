@@ -1,7 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://ducy51jtwnvp2"]
+[gd_scene load_steps=30 format=3 uid="uid://ducy51jtwnvp2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_g8onh"]
 [ext_resource type="Texture2D" uid="uid://dwruorc2q8kvu" path="res://assets/sprites/knight.png" id="1_i2svx"]
+[ext_resource type="PackedScene" uid="uid://2ogrc1m5ehnp" path="res://scenes/randomized_audio.tscn" id="3_u6xrd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb7tr"]
+atlas = ExtResource("1_i2svx")
+region = Rect2(128, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_030rc"]
 atlas = ExtResource("1_i2svx")
@@ -19,7 +24,15 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_i2svx")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h32rb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjstg"]
+atlas = ExtResource("1_i2svx")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1jwg"]
+atlas = ExtResource("1_i2svx")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52bly"]
 atlas = ExtResource("1_i2svx")
 region = Rect2(64, 160, 32, 32)
 
@@ -91,6 +104,14 @@ region = Rect2(224, 96, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sb7tr")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_030rc")
 }, {
 "duration": 1.0,
@@ -108,7 +129,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h32rb")
+"texture": SubResource("AtlasTexture_hjstg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1jwg")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_52bly")
 }],
 "loop": true,
 "name": &"jump",
@@ -181,9 +208,9 @@ script = ExtResource("1_g8onh")
 position = Vector2(0, -12)
 scale = Vector2(1.00136, 1)
 sprite_frames = SubResource("SpriteFrames_vclkd")
-animation = &"jump"
+animation = &"dash"
 autoplay = "idle"
-frame_progress = 0.751696
+frame_progress = 0.92363
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -195,6 +222,8 @@ shape = SubResource("CapsuleShape2D_5nup3")
 wait_time = 0.12
 
 [node name="dash_rebounce" type="Timer" parent="."]
+
+[node name="RandomizedAudio" parent="." instance=ExtResource("3_u6xrd")]
 
 [connection signal="timeout" from="Coyote_Timer" to="." method="Coyoye_Timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

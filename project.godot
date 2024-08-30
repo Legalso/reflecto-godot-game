@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="platformer"
-config/description="prototype for a platformer game, where you can only counter"
-config/version="0"
+config/name="Reflecto"
+config/description="A platformer game where your only attack is a counter"
+config/version="development"
 config/tags=PackedStringArray("tutorial")
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
@@ -31,6 +31,7 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [editor]
 
@@ -112,11 +113,6 @@ dash={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false
 
 [rendering]
 

@@ -219,4 +219,6 @@ libraries = {
 "": SubResource("AnimationLibrary_0mk4a")
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

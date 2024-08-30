@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ogrc1m5ehnp"]
+
+[ext_resource type="AudioStream" uid="uid://8h28ag387ubx" path="res://assets/sounds/jump.wav" id="1_s3iea"]
+[ext_resource type="Script" path="res://scripts/randomized_audio.gd" id="2_khjgf"]
+
+[node name="RandomizedAudio" type="AudioStreamPlayer"]
+stream = ExtResource("1_s3iea")
+script = ExtResource("2_khjgf")

@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var COYOTE_TIMER = $Coyote_Timer
 @onready var joystick = $"../UInode/UI/Virtual Joystick"
+@onready var randomized_audio = $RandomizedAudio
 
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var FALL_GRAVITY = GRAVITY + (GRAVITY * 0.35)
@@ -14,12 +15,14 @@ const JUMP_VELOCITY = -300.0
 var JUMP_AVAILABLE: bool = true
 const JUMP_MAX = 2
 var JUMP_COUNT = 0
-const COYOTE_TIME: float = 0.3
+const COYOTE_TIME: float = 0.4
+var JUMP_SOUND = preload("res://assets/sounds/jump.wav")
 
 const DASH_SPEED = 500.0  # Velocidade fixa para o dash
 var DASHING = false
 var CAN_DASH = true
 var DASH_DIRECTION = Vector2.ZERO  # Direção do dash (mantida fixa durante o dash)
+var DASH_SOUND = preload("res://assets/sounds/tap.wav") 
 
 # Duração do dash baseado na distância desejada e velocidade
 const DASH_DURATION = 0.12  # Duração fixa para o dash (em segundos)
@@ -36,20 +39,18 @@ func _process(delta):
 			if COYOTE_TIMER.is_stopped() and COYOTE_TIMER.time_left == 0:
 				COYOTE_TIMER.start(COYOTE_TIME)
 
-		# Verificar o primeiro salto (jump1)
-		if Input.is_action_just_pressed("jump"):
-			if JUMP_AVAILABLE and (is_on_floor() or not COYOTE_TIMER.is_stopped()):
-				velocity.y = JUMP_VELOCITY
-				JUMP_COUNT += 1
-				if JUMP_COUNT >= JUMP_MAX:
-					JUMP_AVAILABLE = false
-				if JUMP_COUNT == 1:
-					JUMP_AVAILABLE = false
-
-		# Verificar o segundo salto (jump2)
-		if Input.is_action_just_pressed("jump") and JUMP_COUNT == 1 and not is_on_floor():
+		# Verificar o primeiro ou segundo salto (jump1 ou jump2)
+		if Input.is_action_just_pressed("jump") and (JUMP_AVAILABLE and (is_on_floor() or not COYOTE_TIMER.is_stopped()) or (JUMP_COUNT == 1 and not is_on_floor())):
+			print("Jump action triggered")
+			if JUMP_SOUND:
+				print("Jump sound loaded successfully")
+				randomized_audio.custom_play(JUMP_SOUND)  # Pass the jump sound
+			else:
+				print("Jump sound not loaded")
 			velocity.y = JUMP_VELOCITY
 			JUMP_COUNT += 1
+			if JUMP_COUNT >= JUMP_MAX:
+				JUMP_AVAILABLE = false
 
 		# Aplica queda mais rápida se o pulo for interrompido
 		if Input.is_action_just_released("jump") and velocity.y < 0:
@@ -57,13 +58,14 @@ func _process(delta):
 
 		# Verifica e aplica o dash
 		if Input.is_action_just_pressed("dash") and CAN_DASH:
+			if DASH_SOUND:
+				randomized_audio.custom_play(DASH_SOUND)  # Passa o som do dash
 			DASHING = true
 			CAN_DASH = false  # Desabilita o dash até tocar no chão
 			DASH_DIRECTION = Vector2(sign(velocity.x), 0)  # Direção do dash (horizontal)
 			if DASH_DIRECTION == Vector2.ZERO:
 				DASH_DIRECTION = Vector2(-1 if animated_sprite.flip_h else 1, 0)  # Usando a sintaxe correta do operador ternário
 			$dash_timer.start(DASH_DURATION)  # Inicia o dash com duração fixa
-
 
 		# Durante o dash, mantém a velocidade constante na direção do dash
 		if DASHING:
@@ -94,6 +96,8 @@ func _process(delta):
 				animated_sprite.play("run")
 		else:
 			animated_sprite.play("jump")
+		if DASHING:
+			animated_sprite.play("dash")	
 
 # Desabilita o pulo se o personagem não estiver no chão e o Coyote Time acabar
 func Coyoye_Timeout():
