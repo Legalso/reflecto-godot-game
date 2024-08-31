@@ -277,6 +277,7 @@ position = Vector2(1, 16)
 texture_filter = 1
 material = SubResource("ShaderMaterial_tbshs")
 position = Vector2(-1, -13)
+zoom = Vector2(1.5, 1.5)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true

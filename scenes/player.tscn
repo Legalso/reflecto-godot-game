@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://ducy51jtwnvp2"]
+[gd_scene load_steps=33 format=3 uid="uid://ducy51jtwnvp2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_g8onh"]
 [ext_resource type="Texture2D" uid="uid://dwruorc2q8kvu" path="res://assets/sprites/knight.png" id="1_i2svx"]
+[ext_resource type="AudioStream" uid="uid://biyu32mw7rvt0" path="res://assets/sounds/tap.wav" id="2_iho56"]
 [ext_resource type="Shader" path="res://assets/shaders/SmoothPixel.shader.gdshader" id="2_ots8l"]
 [ext_resource type="PackedScene" uid="uid://2ogrc1m5ehnp" path="res://scenes/randomized_audio.tscn" id="3_u6xrd"]
 
@@ -108,7 +109,7 @@ region = Rect2(224, 96, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_vclkd"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_sb7tr")
 }],
 "loop": true,
@@ -208,15 +209,15 @@ height = 14.0
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_g8onh")
+sfx_footstpes = ExtResource("2_iho56")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_83koh")
 position = Vector2(0, -12)
 scale = Vector2(1.00136, 1)
 sprite_frames = SubResource("SpriteFrames_vclkd")
-animation = &"dash"
+animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.92363
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -230,6 +231,7 @@ wait_time = 0.12
 [node name="dash_rebounce" type="Timer" parent="."]
 
 [node name="RandomizedAudio" parent="." instance=ExtResource("3_u6xrd")]
+bus = &"SFX"
 
 [node name="RayCast2D_right" type="RayCast2D" parent="."]
 position = Vector2(0, -19)
@@ -239,6 +241,11 @@ target_position = Vector2(6, 0)
 position = Vector2(0, -19)
 target_position = Vector2(-6, 0)
 
+[node name="sfx_player" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="Coyote_Timer" to="." method="Coyoye_Timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_rebounce" to="." method="_on_dash_rebounce_timeout"]

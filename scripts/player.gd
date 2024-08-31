@@ -26,7 +26,11 @@ const DASH_SPEED = 500.0  # Velocidade fixa para o dash
 var DASHING = false
 var CAN_DASH = true
 var DASH_DIRECTION = Vector2.ZERO  # Direção do dash (mantida fixa durante o dash)
-var DASH_SOUND = preload("res://assets/sounds/tap.wav") 
+var DASH_SOUND = preload("res://assets/sounds/power_up.wav") 
+
+@export var sfx_footstpes : AudioStream
+# @export var jump_sound : AudioStream
+var footstep_frames : Array = [1,5,9,13]
 
 # Duração do dash baseado na distância desejada e velocidade
 const DASH_DURATION = 0.12  # Duração fixa para o dash (em segundos)
@@ -38,6 +42,7 @@ var collision_disable_timer = Timer.new()
 var touching_wall = false
 
 func _ready():
+	animated_sprite = $AnimatedSprite2D
 	add_child(collision_disable_timer)
 	collision_disable_timer.connect("timeout", Callable(self, "_on_collision_disable_timeout"))
 
@@ -106,22 +111,23 @@ func _process(delta):
 			move_and_slide()
 
 		# Inverte o sprite do personagem com base na direção, se não estiver dashando
-		if not DASHING:
+		if not DASHING and animated_sprite != null:
 			if velocity.x > 0:
 				animated_sprite.flip_h = false
 			elif velocity.x < 0:
 				animated_sprite.flip_h = true
 
 		# Controla as animações do personagem com base no estado
-		if is_on_floor():
-			if velocity.x == 0:
-				animated_sprite.play("idle")
+		if animated_sprite != null:
+			if is_on_floor():
+				if velocity.x == 0:
+					animated_sprite.play("idle")
+				else:
+					animated_sprite.play("run")
 			else:
-				animated_sprite.play("run")
-		else:
-			animated_sprite.play("jump")
-		if DASHING:
-			animated_sprite.play("dash")	
+				animated_sprite.play("jump")
+			if DASHING:
+				animated_sprite.play("dash")	
 
 		# Update touching_wall state
 		touching_wall = ray_cast_2d_right.is_colliding() or ray_cast_2d_left.is_colliding()
@@ -156,3 +162,21 @@ func disable_collision_temporarily():
 # Re-enable collision detection
 func _on_collision_disable_timeout():
 	collision_disabled = false
+	
+func load_sfx(sfx_to_load):
+	if %sfx_player.stream != sfx_to_load:
+		%sfx_player.stop()
+		%sfx_player.stream = sfx_to_load
+
+func _on_animated_sprite_2d_frame_changed():
+	if animated_sprite == null:
+		return
+	if animated_sprite.animation == "idle":
+		return
+	if animated_sprite.animation == "jump":
+		return
+	if animated_sprite.animation == "dash":
+		return
+	load_sfx(sfx_footstpes)
+	if animated_sprite.frame in footstep_frames:
+		%sfx_player.play()
