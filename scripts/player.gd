@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var game = $".."
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var COYOTE_TIMER = $Coyote_Timer
 @onready var joystick = $"../UInode/UI/Virtual Joystick"
@@ -38,8 +39,11 @@ const DASH_DURATION = 0.12  # Duração fixa para o dash (em segundos)
 var collision_disabled = false
 var collision_disable_timer = Timer.new()
 
-# New variable to track if the player is touching a wall
+# track if the player is touching a wall
 var touching_wall = false
+
+# save position
+var pos = []
 
 func _ready():
 	animated_sprite = $AnimatedSprite2D
@@ -180,3 +184,12 @@ func _on_animated_sprite_2d_frame_changed():
 	load_sfx(sfx_footstpes)
 	if animated_sprite.frame in footstep_frames:
 		%sfx_player.play()
+
+func save(): 
+	pos.append(position.x)
+	pos.append(position.y)
+	game.pos_dict[name] = pos
+	game.save_game()
+
+func update_pos(p):
+	position = p
