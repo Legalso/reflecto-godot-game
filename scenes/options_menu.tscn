@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c84p42scs5sl1"]
+[gd_scene load_steps=5 format=3 uid="uid://c84p42scs5sl1"]
 
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_qr48s"]
 [ext_resource type="FontFile" uid="uid://btobu8nli76sk" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_v7kqe"]
+[ext_resource type="FontFile" uid="uid://drg3cmm8u6m7o" path="res://assets/fonts/PixelOperator8.ttf" id="2_wr83v"]
 [ext_resource type="Script" path="res://scripts/button.gd" id="3_mldn3"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.553
-anchor_bottom = 0.547
-offset_right = -101.76
-offset_bottom = -50.7601
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qr48s")
@@ -33,20 +33,78 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
+[node name="Volume" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+text = "Volume"
+
+[node name="Volume2" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -20.0
+max_value = 20.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+text = "Mute volume"
+
+[node name="Mute" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+text = "Mute
+"
+
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+text = "Controls"
+
+[node name="Resolutions2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+text = "Resolution"
+
+[node name="Resolutions" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+selected = 0
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "640x360"
+popup/item_0/id = 3
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+popup/item_2/text = "1600x900"
+popup/item_2/id = 1
+popup/item_3/text = "1280x720"
+popup/item_3/id = 2
+
+[node name="Screen Mode" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+text = "Screen mode"
+
+[node name="Screens" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr83v")
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 3
+popup/item_1/text = "Borderless"
+popup/item_1/id = 1
+popup/item_2/text = "Windowned"
+popup/item_2/id = 1
+
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_v7kqe")
 text = "Back"
 script = ExtResource("3_mldn3")
 
-[node name="Volume" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_v7kqe")
-text = "Volume"
-
-[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_v7kqe")
-text = "Controls"
-
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Volume2" to="." method="_on_volume_2_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Mute" to="." method="_on_mute_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Screens" to="." method="_on_screens_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

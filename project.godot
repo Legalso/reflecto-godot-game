@@ -40,6 +40,10 @@ window/handheld/orientation=4
 
 movie_writer/fps=165
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/gdfxr/plugin.cfg")
+
 [input]
 
 ui_accept={
