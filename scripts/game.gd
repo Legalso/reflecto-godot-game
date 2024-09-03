@@ -3,7 +3,6 @@ extends Node2D
 @onready var player = $Player  # Get a reference to the player node
 @onready var pause_menu = $Player/CanvasLayer/Control/PauseMenu
 @onready var killzone = $Killzone
-@onready var ui_node = $UInode/UI
 
 var PAUSED = false
 

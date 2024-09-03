@@ -3,7 +3,6 @@ extends CharacterBody2D
 @onready var game = $".."
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var COYOTE_TIMER = $Coyote_Timer
-@onready var joystick = $"../UInode/UI/Virtual Joystick"
 @onready var randomized_audio = $RandomizedAudio
 @onready var ray_cast_2d_right = $RayCast2D_right
 @onready var ray_cast_2d_left = $RayCast2D_left
@@ -167,10 +166,16 @@ func disable_collision_temporarily():
 func _on_collision_disable_timeout():
 	collision_disabled = false
 	
+# func load_sfx(sfx_to_load):
+# 	if %sfx_player.stream != sfx_to_load:
+# 		%sfx_player.stop()
+# 		%sfx_player.stream = sfx_to_load
+		
 func load_sfx(sfx_to_load):
 	if %sfx_player.stream != sfx_to_load:
 		%sfx_player.stop()
 		%sfx_player.stream = sfx_to_load
+		%sfx_player.bus = "SFX"  # Set the audio bus to "SFX"
 
 func _on_animated_sprite_2d_frame_changed():
 	if animated_sprite == null:
