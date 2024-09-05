@@ -461,3 +461,5 @@ position = Vector2(183, -128)
 
 [node name="Slime2" parent="Slime" instance=ExtResource("6_no2bd")]
 position = Vector2(263, 16)
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

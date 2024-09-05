@@ -52,10 +52,10 @@ theme_override_fonts/font = ExtResource("1_bivia")
 text = "Resume"
 script = ExtResource("4_k0yhj")
 
-[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bivia")
-text = "Controls"
+text = "Options"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -63,5 +63,5 @@ theme_override_fonts/font = ExtResource("1_bivia")
 text = "Quit to menu"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
