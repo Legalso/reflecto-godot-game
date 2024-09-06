@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://djho7wxsr0h3r"]
+
+[ext_resource type="Texture2D" uid="uid://df485vph0dh4q" path="res://assets/assetlib/Godot-Ver2-Dark.png" id="1_l6nuu"]
+[ext_resource type="Script" path="res://scripts/intro.gd" id="1_s17nn"]
+
+[sub_resource type="Animation" id="Animation_n6hwm"]
+resource_name = "Fade In"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a7mfb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ess64"]
+resource_name = "Fade Out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_inrj0"]
+_data = {
+"Fade In": SubResource("Animation_n6hwm"),
+"Fade Out": SubResource("Animation_ess64"),
+"RESET": SubResource("Animation_a7mfb")
+}
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_s17nn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320.88, 172.938)
+scale = Vector2(0.213275, 0.213274)
+texture = ExtResource("1_l6nuu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -164.0
+offset_top = -133.0
+offset_right = 778.0
+offset_bottom = 477.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_inrj0")
+}

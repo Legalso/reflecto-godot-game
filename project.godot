@@ -14,11 +14,12 @@ config/name="Reflecto"
 config/description="A platformer game where your only attack is a counter"
 config/version="development"
 config/tags=PackedStringArray("tutorial")
-run/main_scene="res://scenes/menu.tscn"
+run/main_scene="res://scenes/intro.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ReflectoSaves"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://startup.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 

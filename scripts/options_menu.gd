@@ -17,6 +17,10 @@ func _on_back_pressed():
 		var PAUSED = false
 		PAUSED = false
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
+		# TODO: //FIX quando sair do menu de opções após ter pausado o jogo
+		# não deve resetar a cena.
+		# TODO: Salvar o estado anterior ao entrar no menu de opções, e então 
+		# voltar para a mesma localização
 
 func _on_volume_2_value_changed(value):
 	AudioServer.set_bus_volume_db(0, value)
